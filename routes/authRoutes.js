@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const supabase = require("../supabase");
 
+// STAGE 1: git log -1 --onelineOpen Auth: Sign Up & Log In
 // Signup route
 router.post("/signup", async (req, res) => {
     try {
@@ -82,4 +83,9 @@ router.post("/login", async (req, res) => {
         });
     }
 });
+
+
+
+
+
 module.exports = router;

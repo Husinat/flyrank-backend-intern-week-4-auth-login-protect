@@ -1,13 +1,15 @@
 const express = require('express');
-
+const protectedRoutes = require('./routes/protectedRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const authRoutes = require("./routes/authRoutes");
 
+const authRoutes = require("./routes/authRoutes");
 app.use("/auth", authRoutes);
+app.use("/protected", protectedRoutes);
+
 
 app.get("/", (req, res) =>{
     res.json({
@@ -15,11 +17,11 @@ app.get("/", (req, res) =>{
     });
 });
 
-app.get("/public/info", (req, res) =>{
-   res.json({
-    message: "This is a public route. No authentication required"
-   })
-})
+app.get("/public/info", (req, res) => {
+    res.status(200).json({
+        message: "Welcome stranger! This info is public."
+    });
+});
 
 app.listen(PORT, () =>{
     console.log(`Server is running on port: ${PORT}`);  
