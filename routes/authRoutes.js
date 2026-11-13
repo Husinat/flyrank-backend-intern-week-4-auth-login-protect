@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const supabase = require("../supabase");
+const authenticateToken = require("../middleware/authMiddleware");
 
 // STAGE 1: git log -1 --onelineOpen Auth: Sign Up & Log In
 // Signup route
@@ -84,6 +85,37 @@ router.post("/login", async (req, res) => {
     }
 });
 
+
+// Logout Route
+router.post("/logout", authenticateToken, async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+
+    const response = await fetch(
+      `${process.env.SUPABASE_URL}/auth/v1/logout?scope=local`,
+      {
+        method: "POST",
+        headers: {
+          apikey: process.env.SUPABASE_KEY,
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error: "Logout failed"
+      });
+    }
+
+    return res.status(204).send();
+
+  } catch (error) {
+    return res.status(500).json({
+      error: "Internal server error"
+    });
+  }
+});
 
 
 
