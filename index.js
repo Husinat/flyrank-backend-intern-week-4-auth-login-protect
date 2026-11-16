@@ -1,9 +1,12 @@
+const swaggerUi = require("swagger-ui-express");
+const openApiDocument = require("./openapi.json");
 const express = require('express');
 const protectedRoutes = require('./routes/protectedRoutes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
 
 
 const authRoutes = require("./routes/authRoutes");
