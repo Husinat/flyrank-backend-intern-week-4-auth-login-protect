@@ -53,8 +53,8 @@ week-4-auth-login-protect/
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
-cd week-4-auth-login-protect
+git clone https://github.com/Husinat/flyrank-backend-intern-week-4-auth-login-protect.git
+cd flyrank-backend-intern-week-4-auth-login-protect
 ```
 
 ### 2. Install dependencies
